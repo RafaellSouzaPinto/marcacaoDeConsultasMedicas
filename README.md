@@ -1,56 +1,70 @@
-👥 Equipe
-Rafael de Souza Pinto – RM: 555130
-🏥 Sistema de Agendamento de Consultas Médicas
-Aplicativo mobile construído com React Native e Expo, projetado para oferecer uma experiência simples e eficiente na marcação e gerenciamento de consultas médicas diretamente pelo celular.
+# 🏥 Sistema de Agendamento de Consultas Médicas
 
-📲 Funcionalidades
-🗓️ Agendar Consultas – Escolha a data, o horário e a especialidade desejada.
+Aplicativo mobile construído com **React Native e Expo**, projetado para oferecer uma experiência simples e eficiente na marcação e gerenciamento de consultas médicas diretamente pelo celular.
 
-📃 Ver Consultas Agendadas – Acompanhe facilmente os compromissos futuros.
+---
 
-❌ Cancelar Agendamentos – Exclua consultas de forma prática.
+## 👤 Desenvolvedor
 
-🕒 Seleção de datas/hora com DateTimePicker.
+**Rafael de Souza Pinto** – **RM: 555130**
 
-💾 Persistência de dados com AsyncStorage – Os dados ficam salvos no próprio aparelho.
+---
 
-💅 Visual moderno com Styled-Components.
+## 📲 Funcionalidades
 
-👤 Tipos de Usuário
-A aplicação contempla três perfis diferentes, com permissões específicas:
+- 🗓️ **Agendar Consultas** – Escolha a data, o horário e a especialidade desejada.
+- 📃 **Ver Consultas Agendadas** – Acompanhe facilmente os compromissos futuros.
+- ❌ **Cancelar Agendamentos** – Exclua consultas de forma prática.
+- 🕒 **Seleção de datas/hora com DateTimePicker**.
+- 💾 **Persistência de dados com AsyncStorage** – Os dados ficam salvos no próprio aparelho.
+- 💅 **Visual moderno com Styled-Components**.
 
-👤 Paciente
-Pode marcar, visualizar e cancelar suas consultas.
+---
 
-🩺 Médico
-Consulta sua agenda de atendimentos.
+## 👥 Perfis de Usuário
 
-Pode atualizar o status das consultas (em desenvolvimento).
+A aplicação contempla **três perfis diferentes**, com permissões específicas:
 
-Acessa informações básicas dos pacientes.
+### 👤 Paciente
+- Pode marcar, visualizar e cancelar suas consultas.
 
-🧑‍💼 Administrador
-Visualiza todas as consultas do sistema.
+### 🩺 Médico
+- Consulta sua agenda de atendimentos.
+- Pode atualizar o status das consultas (em desenvolvimento).
+- Acessa informações básicas dos pacientes.
 
-Gerencia médicos e pacientes (adicionar, editar, excluir).
+### 🧑‍💼 Administrador
+- Visualiza todas as consultas do sistema.
+- Gerencia médicos e pacientes (adicionar, editar, excluir).
+- Futuramente: acesso a relatórios e estatísticas do sistema.
 
-Futuramente: acesso a relatórios e estatísticas do sistema.
+---
 
-🧰 Tecnologias Empregadas
-React Native 0.76.7
+## 🧰 Tecnologias Utilizadas
 
-Expo ~52.0.38
+- **React Native 0.76.7**
+- **Expo ~52.0.38**
+- **React Navigation** (Bottom Tabs, Stack, Drawer)
+- **@react-native-async-storage/async-storage**
+- **styled-components**
+- **react-native-elements**
+- **@react-native-community/datetimepicker**
+- **expo-linear-gradient**
+- **expo-av** e **expo-haptics**
 
-React Navigation (padrões: Bottom Tabs, Stack, Drawer)
+---
 
-@react-native-async-storage/async-storage
+## 📦 Instalação
 
-styled-components
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/nome-do-projeto.git
 
-react-native-elements
+# Acesse o diretório
+cd nome-do-projeto
 
-@react-native-community/datetimepicker
+# Instale as dependências
+npm install
 
-expo-linear-gradient
-
-expo-av e expo-haptics
+# Inicie o projeto
+npx expo start
