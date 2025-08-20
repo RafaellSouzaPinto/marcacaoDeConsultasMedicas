@@ -198,33 +198,38 @@ const Title = styled.Text`
 `;
 
 const AppointmentCard = styled(ListItem)`
-  background-color: ${theme.colors.background};
-  border-radius: 8px;
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   margin-bottom: 10px;
   padding: 15px;
   border-width: 1px;
   border-color: ${theme.colors.border};
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.08;
+  shadow-radius: 8px;
+  elevation: 2;
 `;
 
 const LoadingText = styled.Text`
   text-align: center;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-size: 16px;
   margin-top: 20px;
 `;
 
 const EmptyText = styled.Text`
   text-align: center;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-size: 16px;
   margin-top: 20px;
 `;
 
 const StatusBadge = styled.View<StyledProps>`
   background-color: ${(props: StyledProps) =>
-    getStatusColor(props.status) + "20"};
+    getStatusColor(props.status) + "12"};
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: ${theme.radii.small}px;
   align-self: flex-start;
   margin-top: 8px;
 `;

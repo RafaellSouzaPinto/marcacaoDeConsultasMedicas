@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import { Badge } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import { notificationService } from "../services/notifications";
@@ -45,7 +46,12 @@ const NotificationBell: React.FC = () => {
   return (
     <TouchableOpacity onPress={handlePress}>
       <BellContainer>
-        <BellIcon>🔔</BellIcon>
+        {unreadCount > 0 && <BellDot />}
+        <Ionicons
+          name="notifications-outline"
+          size={22}
+          color={theme.colors.text}
+        />
         {unreadCount > 0 && (
           <Badge
             value={unreadCount > 99 ? "99+" : unreadCount.toString()}
@@ -75,9 +81,14 @@ const BellContainer = styled.View`
   padding: 8px;
 `;
 
-const BellIcon = styled.Text`
-  font-size: 24px;
-  color: ${theme.colors.white};
+const BellDot = styled.View`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: ${theme.colors.primary};
 `;
 
 export default NotificationBell;

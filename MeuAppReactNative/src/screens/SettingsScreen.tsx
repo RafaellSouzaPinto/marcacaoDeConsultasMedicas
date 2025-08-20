@@ -261,18 +261,22 @@ const styles = {
   buttonStyle: {
     backgroundColor: theme.colors.primary,
     paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
   backupButton: {
     backgroundColor: theme.colors.success,
     paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
   cacheButton: {
     backgroundColor: theme.colors.warning,
     paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
   dangerButton: {
     backgroundColor: theme.colors.error,
     paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
 };
 
@@ -309,11 +313,16 @@ const SectionTitle = styled.Text`
 `;
 
 const SettingsCard = styled.View`
-  background-color: ${theme.colors.white};
-  border-radius: 8px;
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   margin-bottom: 15px;
   border-width: 1px;
   border-color: ${theme.colors.border};
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.06;
+  shadow-radius: 6px;
+  elevation: 1;
 `;
 
 const InfoItem = styled.View`
@@ -327,12 +336,12 @@ const InfoItem = styled.View`
 
 const InfoLabel = styled.Text`
   font-size: 16px;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
 `;
 
 const InfoValue = styled.Text`
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
   color: ${theme.colors.primary};
 `;
 

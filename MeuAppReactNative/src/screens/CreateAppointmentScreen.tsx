@@ -191,7 +191,7 @@ const styles = {
     padding: 20,
   },
   input: {
-    marginBottom: 15,
+    marginBottom: 12,
   },
   button: {
     marginTop: 10,
@@ -199,11 +199,13 @@ const styles = {
   },
   buttonStyle: {
     backgroundColor: theme.colors.primary,
-    paddingVertical: 12,
+    paddingVertical: 14,
+    borderRadius: theme.radii.medium,
   },
   cancelButton: {
     backgroundColor: theme.colors.secondary,
-    paddingVertical: 12,
+    paddingVertical: 14,
+    borderRadius: theme.radii.medium,
   },
 };
 
@@ -213,19 +215,19 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 24px;
-  font-weight: bold;
+  font-size: ${theme.typography.title.fontSize}px;
+  font-weight: ${theme.typography.title.fontWeight};
   color: ${theme.colors.text};
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   text-align: center;
 `;
 
 const SectionTitle = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
+  font-size: ${theme.typography.subtitle.fontSize}px;
+  font-weight: ${theme.typography.subtitle.fontWeight};
   color: ${theme.colors.text};
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 8px;
+  margin-top: 8px;
 `;
 
 const ErrorText = styled.Text`

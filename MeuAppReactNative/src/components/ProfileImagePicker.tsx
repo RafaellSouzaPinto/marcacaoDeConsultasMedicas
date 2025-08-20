@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Alert, ActivityIndicator, TouchableOpacity, View } from 'react-native';
-import styled from 'styled-components/native';
-import { Ionicons } from '@expo/vector-icons';
-import { imageService, ImageResult } from '../services/imageService';
-import theme from '../styles/theme';
+import React, { useState } from "react";
+import { Alert, ActivityIndicator, TouchableOpacity, View } from "react-native";
+import styled from "styled-components/native";
+import { Ionicons } from "@expo/vector-icons";
+import { imageService, ImageResult } from "../services/imageService";
+import theme from "../styles/theme";
 
 interface ProfileImagePickerProps {
   currentImageUri?: string;
@@ -22,26 +22,30 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
 
   const showImageOptions = () => {
     Alert.alert(
-      'Alterar Foto de Perfil',
-      'Como você gostaria de alterar sua foto?',
+      "Alterar Foto de Perfil",
+      "Como você gostaria de alterar sua foto?",
       [
         {
-          text: 'Cancelar',
-          style: 'cancel',
+          text: "Cancelar",
+          style: "cancel",
         },
         {
-          text: 'Galeria',
+          text: "Galeria",
           onPress: pickFromGallery,
         },
         {
-          text: 'Câmera',
+          text: "Câmera",
           onPress: takePhoto,
         },
-        ...(currentImageUri && !currentImageUri.includes('placeholder') ? [{
-          text: 'Remover Foto',
-          style: 'destructive' as const,
-          onPress: removePhoto,
-        }] : []),
+        ...(currentImageUri && !currentImageUri.includes("placeholder")
+          ? [
+              {
+                text: "Remover Foto",
+                style: "destructive" as const,
+                onPress: removePhoto,
+              },
+            ]
+          : []),
       ]
     );
   };
@@ -50,13 +54,13 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
     try {
       setLoading(true);
       const result = await imageService.pickImageFromGallery();
-      
+
       if (result) {
         await handleImageResult(result);
       }
     } catch (error) {
-      console.error('Erro ao selecionar imagem:', error);
-      Alert.alert('Erro', 'Não foi possível selecionar a imagem da galeria');
+      console.error("Erro ao selecionar imagem:", error);
+      Alert.alert("Erro", "Não foi possível selecionar a imagem da galeria");
     } finally {
       setLoading(false);
     }
@@ -66,13 +70,13 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
     try {
       setLoading(true);
       const result = await imageService.takePhoto();
-      
+
       if (result) {
         await handleImageResult(result);
       }
     } catch (error) {
-      console.error('Erro ao capturar foto:', error);
-      Alert.alert('Erro', 'Não foi possível capturar a foto');
+      console.error("Erro ao capturar foto:", error);
+      Alert.alert("Erro", "Não foi possível capturar a foto");
     } finally {
       setLoading(false);
     }
@@ -87,23 +91,23 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
         onImageSelected(result.uri);
       }
     } catch (error) {
-      console.error('Erro ao processar imagem:', error);
-      Alert.alert('Erro', 'Não foi possível processar a imagem selecionada');
+      console.error("Erro ao processar imagem:", error);
+      Alert.alert("Erro", "Não foi possível processar a imagem selecionada");
     }
   };
 
   const removePhoto = () => {
     Alert.alert(
-      'Remover Foto',
-      'Tem certeza que deseja remover sua foto de perfil?',
+      "Remover Foto",
+      "Tem certeza que deseja remover sua foto de perfil?",
       [
         {
-          text: 'Cancelar',
-          style: 'cancel',
+          text: "Cancelar",
+          style: "cancel",
         },
         {
-          text: 'Remover',
-          style: 'destructive',
+          text: "Remover",
+          style: "destructive",
           onPress: () => {
             onImageSelected(imageService.getPlaceholderImage());
           },
@@ -122,28 +126,21 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
   return (
     <Container>
       <ImageContainer size={size}>
-        <ProfileImage 
-          source={getImageSource()}
-          size={size}
-        />
-        
+        <ProfileImage source={getImageSource()} size={size} />
+
         {loading && (
           <LoadingOverlay size={size}>
             <ActivityIndicator size="large" color={theme.colors.primary} />
           </LoadingOverlay>
         )}
-        
+
         {editable && (
           <EditButton onPress={showImageOptions} disabled={loading}>
-            <Ionicons 
-              name="camera" 
-              size={20} 
-              color={theme.colors.white} 
-            />
+            <Ionicons name="camera" size={20} color={theme.colors.white} />
           </EditButton>
         )}
       </ImageContainer>
-      
+
       {editable && (
         <ChangePhotoText>Toque no ícone para alterar</ChangePhotoText>
       )}
@@ -157,26 +154,26 @@ const Container = styled.View`
 `;
 
 const ImageContainer = styled.View<{ size: number }>`
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
   position: relative;
 `;
 
 const ProfileImage = styled.Image<{ size: number }>`
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  border-radius: ${props => props.size / 2}px;
-  border-width: 3px;
-  border-color: ${theme.colors.primary};
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  border-radius: ${(props) => props.size / 2}px;
+  border-width: 2px;
+  border-color: ${theme.colors.border};
 `;
 
 const LoadingOverlay = styled.View<{ size: number }>`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  border-radius: ${props => props.size / 2}px;
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  border-radius: ${(props) => props.size / 2}px;
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
@@ -193,12 +190,12 @@ const EditButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-width: 2px;
-  border-color: ${theme.colors.white};
+  border-color: ${theme.colors.surface};
   shadow-color: #000;
-  shadow-offset: 0px 2px;
-  shadow-opacity: 0.25;
-  shadow-radius: 3.84px;
-  elevation: 5;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.12;
+  shadow-radius: 6px;
+  elevation: 3;
 `;
 
 const ChangePhotoText = styled.Text`

@@ -199,12 +199,17 @@ const Title = styled.Text`
 `;
 
 const UserCard = styled(ListItem)`
-  background-color: ${theme.colors.background};
-  border-radius: 8px;
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   margin-bottom: 10px;
   padding: 15px;
   border-width: 1px;
   border-color: ${theme.colors.border};
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.08;
+  shadow-radius: 8px;
+  elevation: 2;
 `;
 
 const LoadingText = styled.Text`
@@ -225,15 +230,15 @@ const RoleBadge = styled.View<StyledProps>`
   background-color: ${(props: StyledProps) => {
     switch (props.role) {
       case "admin":
-        return theme.colors.primary + "20";
+        return theme.colors.primary + "12";
       case "doctor":
-        return theme.colors.success + "20";
+        return theme.colors.success + "12";
       default:
-        return theme.colors.secondary + "20";
+        return theme.colors.secondary + "12";
     }
   }};
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: ${theme.radii.small}px;
   align-self: flex-start;
   margin-top: 8px;
 `;
@@ -250,7 +255,7 @@ const RoleText = styled.Text<StyledProps>`
     }
   }};
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const ButtonContainer = styled.View`

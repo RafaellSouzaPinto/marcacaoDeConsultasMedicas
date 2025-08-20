@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
-import styled from 'styled-components/native';
-import { ScrollView, ViewStyle, Alert } from 'react-native';
-import { Button, Input } from 'react-native-elements';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
-import theme from '../styles/theme';
-import Header from '../components/Header';
-import ProfileImagePicker from '../components/ProfileImagePicker';
-import { imageService } from '../services/imageService';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from "react";
+import styled from "styled-components/native";
+import { ScrollView, ViewStyle, Alert } from "react-native";
+import { Button, Input } from "react-native-elements";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types/navigation";
+import theme from "../styles/theme";
+import Header from "../components/Header";
+import ProfileImagePicker from "../components/ProfileImagePicker";
+import { imageService } from "../services/imageService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type EditProfileScreenProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'EditProfile'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, "EditProfile">;
 };
 
 const EditProfileScreen: React.FC = () => {
   const { user, updateUser } = useAuth();
-  const navigation = useNavigation<EditProfileScreenProps['navigation']>();
-  
-  const [name, setName] = useState(user?.name || '');
-  const [email, setEmail] = useState(user?.email || '');
-  const [specialty, setSpecialty] = useState(user?.specialty || '');
-  const [profileImage, setProfileImage] = useState(user?.image || '');
+  const navigation = useNavigation<EditProfileScreenProps["navigation"]>();
+
+  const [name, setName] = useState(user?.name || "");
+  const [email, setEmail] = useState(user?.email || "");
+  const [specialty, setSpecialty] = useState(user?.specialty || "");
+  const [profileImage, setProfileImage] = useState(user?.image || "");
   const [loading, setLoading] = useState(false);
 
   const handleImageSelected = async (imageUri: string) => {
     try {
       setProfileImage(imageUri);
-      
+
       // Salva a imagem no armazenamento local se for uma nova imagem
-      if (imageUri.startsWith('data:image/') && user?.id) {
+      if (imageUri.startsWith("data:image/") && user?.id) {
         const savedImageUri = await imageService.saveProfileImage(user.id, {
           uri: imageUri,
-          base64: imageUri.split(',')[1],
+          base64: imageUri.split(",")[1],
           width: 150,
           height: 150,
         });
         setProfileImage(savedImageUri);
       }
     } catch (error) {
-      console.error('Erro ao processar imagem:', error);
-      Alert.alert('Erro', 'Não foi possível processar a imagem selecionada');
+      console.error("Erro ao processar imagem:", error);
+      Alert.alert("Erro", "Não foi possível processar a imagem selecionada");
     }
   };
 
@@ -51,7 +51,7 @@ const EditProfileScreen: React.FC = () => {
       setLoading(true);
 
       if (!name.trim() || !email.trim()) {
-        Alert.alert('Erro', 'Nome e email são obrigatórios');
+        Alert.alert("Erro", "Nome e email são obrigatórios");
         return;
       }
 
@@ -60,27 +60,29 @@ const EditProfileScreen: React.FC = () => {
         name: name.trim(),
         email: email.trim(),
         image: profileImage,
-        ...(user?.role === 'doctor' && { specialty: specialty.trim() }),
+        ...(user?.role === "doctor" && { specialty: specialty.trim() }),
       };
 
       // Atualiza no Context
       await updateUser(updatedUser);
 
       // Salva no AsyncStorage
-      await AsyncStorage.setItem('@MedicalApp:user', JSON.stringify(updatedUser));
+      await AsyncStorage.setItem(
+        "@MedicalApp:user",
+        JSON.stringify(updatedUser)
+      );
 
       // Limpeza de imagens antigas
       if (user?.id) {
         await imageService.cleanupOldImages(user.id);
       }
 
-      Alert.alert('Sucesso', 'Perfil atualizado com sucesso!', [
-        { text: 'OK', onPress: () => navigation.goBack() }
+      Alert.alert("Sucesso", "Perfil atualizado com sucesso!", [
+        { text: "OK", onPress: () => navigation.goBack() },
       ]);
-
     } catch (error) {
-      Alert.alert('Erro', 'Não foi possível atualizar o perfil');
-      console.error('Erro ao atualizar perfil:', error);
+      Alert.alert("Erro", "Não foi possível atualizar o perfil");
+      console.error("Erro ao atualizar perfil:", error);
     } finally {
       setLoading(false);
     }
@@ -99,7 +101,7 @@ const EditProfileScreen: React.FC = () => {
             size={120}
             editable={true}
           />
-          
+
           <Input
             label="Nome"
             value={name}
@@ -118,7 +120,7 @@ const EditProfileScreen: React.FC = () => {
             autoCapitalize="none"
           />
 
-          {user?.role === 'doctor' && (
+          {user?.role === "doctor" && (
             <Input
               label="Especialidade"
               value={specialty}
@@ -128,8 +130,14 @@ const EditProfileScreen: React.FC = () => {
             />
           )}
 
-          <RoleBadge role={user?.role || ''}>
-            <RoleText>{user?.role === 'admin' ? 'Administrador' : user?.role === 'doctor' ? 'Médico' : 'Paciente'}</RoleText>
+          <RoleBadge role={user?.role || ""}>
+            <RoleText>
+              {user?.role === "admin"
+                ? "Administrador"
+                : user?.role === "doctor"
+                ? "Médico"
+                : "Paciente"}
+            </RoleText>
           </RoleBadge>
         </ProfileCard>
 
@@ -161,7 +169,7 @@ const styles = {
   },
   button: {
     marginBottom: 15,
-    width: '100%',
+    width: "100%",
   },
   saveButton: {
     backgroundColor: theme.colors.success,
@@ -187,13 +195,18 @@ const Title = styled.Text`
 `;
 
 const ProfileCard = styled.View`
-  background-color: ${theme.colors.white};
-  border-radius: 8px;
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   padding: 20px;
   margin-bottom: 20px;
   align-items: center;
   border-width: 1px;
   border-color: ${theme.colors.border};
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.08;
+  shadow-radius: 8px;
+  elevation: 2;
 `;
 
 // Avatar removido - agora usamos o ProfileImagePicker
@@ -201,23 +214,23 @@ const ProfileCard = styled.View`
 const RoleBadge = styled.View<{ role: string }>`
   background-color: ${(props: { role: string }) => {
     switch (props.role) {
-      case 'admin':
-        return theme.colors.primary + '20';
-      case 'doctor':
-        return theme.colors.success + '20';
+      case "admin":
+        return theme.colors.primary + "20";
+      case "doctor":
+        return theme.colors.success + "20";
       default:
-        return theme.colors.secondary + '20';
+        return theme.colors.secondary + "20";
     }
   }};
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: ${theme.radii.small}px;
   margin-top: 10px;
 `;
 
 const RoleText = styled.Text`
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 export default EditProfileScreen;

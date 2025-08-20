@@ -89,7 +89,8 @@ const styles = {
   },
   buttonStyle: {
     backgroundColor: theme.colors.primary,
-    paddingVertical: 12,
+    paddingVertical: 14,
+    borderRadius: theme.radii.medium,
   },
   registerButton: {
     marginTop: 10,
@@ -97,7 +98,8 @@ const styles = {
   },
   registerButtonStyle: {
     backgroundColor: theme.colors.secondary,
-    paddingVertical: 12,
+    paddingVertical: 14,
+    borderRadius: theme.radii.medium,
   },
   hint: {
     marginTop: 20,
@@ -120,10 +122,10 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 24px;
-  font-weight: bold;
+  font-size: ${theme.typography.title.fontSize}px;
+  font-weight: ${theme.typography.title.fontWeight};
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   color: ${theme.colors.text};
 `;
 

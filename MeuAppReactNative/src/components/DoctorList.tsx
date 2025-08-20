@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import { ViewStyle } from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements';
-import theme from '../styles/theme';
+import React from "react";
+import styled from "styled-components/native";
+import { ViewStyle } from "react-native";
+import { ListItem, Avatar } from "react-native-elements";
+import theme from "../styles/theme";
 interface Doctor {
   id: string;
   name: string;
@@ -52,14 +52,19 @@ const DoctorList: React.FC<DoctorListProps> = ({
 };
 const styles = {
   listItem: {
-    borderRadius: 8,
-    marginVertical: 4,
-    backgroundColor: theme.colors.background,
+    borderRadius: theme.radii.large,
+    marginVertical: 6,
+    backgroundColor: theme.colors.surface,
     borderWidth: 1,
     borderColor: theme.colors.border,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 2,
   },
   selectedItem: {
-    backgroundColor: theme.colors.primary + '20',
+    backgroundColor: theme.colors.primary + "10",
     borderColor: theme.colors.primary,
   },
   avatar: {
@@ -67,13 +72,12 @@ const styles = {
   },
   name: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "700",
     color: theme.colors.text,
   },
   specialty: {
     fontSize: 14,
-    color: theme.colors.text,
-    opacity: 0.7,
+    color: theme.colors.textSecondary,
   },
 };
 const Container = styled.View`

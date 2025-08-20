@@ -193,7 +193,8 @@ const styles = {
   },
   markAllButtonStyle: {
     backgroundColor: theme.colors.success,
-    paddingVertical: 10,
+    paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
   button: {
     marginBottom: 20,
@@ -202,6 +203,7 @@ const styles = {
   buttonStyle: {
     backgroundColor: theme.colors.primary,
     paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
   title: {
     fontSize: 16,
@@ -229,15 +231,15 @@ const TitleContainer = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 24px;
-  font-weight: bold;
+  font-size: ${theme.typography.title.fontSize}px;
+  font-weight: ${theme.typography.title.fontWeight};
   color: ${theme.colors.text};
   text-align: center;
 `;
 
 const LoadingText = styled.Text`
   text-align: center;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-size: 16px;
   margin-top: 20px;
 `;
@@ -249,19 +251,23 @@ const EmptyContainer = styled.View`
 
 const EmptyText = styled.Text`
   text-align: center;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-size: 16px;
-  opacity: 0.7;
 `;
 
 const NotificationCard = styled.View<{ isRead: boolean }>`
   background-color: ${(props) =>
-    props.isRead ? theme.colors.white : theme.colors.primary + "10"};
-  border-radius: 8px;
+    props.isRead ? theme.colors.surface : theme.colors.primary + "08"};
+  border-radius: ${theme.radii.large}px;
   margin-bottom: 8px;
   border-width: 1px;
   border-color: ${(props) =>
     props.isRead ? theme.colors.border : theme.colors.primary + "30"};
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.06;
+  shadow-radius: 6px;
+  elevation: 1;
 `;
 
 const NotificationIcon = styled.Text`

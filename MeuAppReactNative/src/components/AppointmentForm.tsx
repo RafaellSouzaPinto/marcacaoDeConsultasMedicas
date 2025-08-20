@@ -231,25 +231,28 @@ const DoctorList = styled.ScrollView`
   margin-bottom: ${theme.spacing.large}px;
 `;
 
-const DoctorCard = styled(TouchableOpacity) <{ selected: boolean }>`
+const DoctorCard = styled(TouchableOpacity)<{ selected: boolean }>`
   flex-direction: row;
   align-items: center;
   padding: ${theme.spacing.medium}px;
   background-color: ${(props: { selected: boolean }) =>
-    props.selected ? theme.colors.primary : theme.colors.white};
-  border-radius: 8px;
+    props.selected ? theme.colors.primary + "08" : theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   margin-bottom: ${theme.spacing.medium}px;
-  elevation: 2;
+  border-width: 1px;
+  border-color: ${(props: { selected: boolean }) =>
+    props.selected ? theme.colors.primary : theme.colors.border};
   shadow-color: #000;
-  shadow-opacity: 0.1;
-  shadow-radius: 4px;
-  shadow-offset: 0px 2px;
+  shadow-opacity: 0.06;
+  shadow-radius: 6px;
+  shadow-offset: 0px 1px;
+  elevation: 1;
 `;
 
 const DoctorImage = styled.Image`
   width: 60px;
   height: 60px;
-  border-radius: 30px;
+  border-radius: 16px;
   margin-right: ${theme.spacing.medium}px;
 `;
 
@@ -285,7 +288,7 @@ const TimeSlotsGrid = styled.View`
   gap: ${theme.spacing.small}px;
 `;
 
-const TimeSlotButton = styled(TouchableOpacity) <{
+const TimeSlotButton = styled(TouchableOpacity)<{
   selected: boolean;
   disabled: boolean;
 }>`
@@ -293,28 +296,28 @@ const TimeSlotButton = styled(TouchableOpacity) <{
     props.disabled
       ? theme.colors.background
       : props.selected
-        ? theme.colors.primary
-        : theme.colors.white};
+      ? theme.colors.primary
+      : theme.colors.surface};
   padding: ${theme.spacing.small}px ${theme.spacing.medium}px;
-  border-radius: 8px;
+  border-radius: ${theme.radii.small}px;
   border-width: 1px;
   border-color: ${(props: { selected: boolean; disabled: boolean }) =>
     props.disabled
       ? theme.colors.background
       : props.selected
-        ? theme.colors.primary
-        : theme.colors.text};
+      ? theme.colors.primary
+      : theme.colors.border};
   opacity: ${(props: { disabled: boolean }) => (props.disabled ? 0.5 : 1)};
 `;
 
-const TimeSlotText = styled(Text) <{ selected: boolean; disabled: boolean }>`
+const TimeSlotText = styled(Text)<{ selected: boolean; disabled: boolean }>`
   font-size: ${theme.typography.body.fontSize}px;
   color: ${(props: { selected: boolean; disabled: boolean }) =>
     props.disabled
-      ? theme.colors.text
+      ? theme.colors.textSecondary
       : props.selected
-        ? theme.colors.white
-        : theme.colors.text};
+      ? theme.colors.white
+      : theme.colors.text};
 `;
 
 const InputContainer = {

@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import { ViewStyle } from 'react-native';
-import { Card, Text, Avatar } from '@rneui/themed';
-import theme from '../styles/theme';
+import React from "react";
+import styled from "styled-components/native";
+import { ViewStyle } from "react-native";
+import { Card, Text, Avatar } from "@rneui/themed";
+import theme from "../styles/theme";
 
 interface AppointmentCardProps {
   doctorName: string;
   date: string;
   time: string;
   specialty: string;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: "pending" | "confirmed" | "cancelled";
   onPress?: () => void;
   style?: ViewStyle;
 }
@@ -25,9 +25,9 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({
 }) => {
   const getStatusColor = () => {
     switch (status) {
-      case 'confirmed':
+      case "confirmed":
         return theme.colors.success;
-      case 'cancelled':
+      case "cancelled":
         return theme.colors.error;
       default:
         return theme.colors.primary;
@@ -40,7 +40,11 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({
         <Avatar
           size="medium"
           rounded
-          source={{ uri: `https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 10)}.jpg` }}
+          source={{
+            uri: `https://randomuser.me/api/portraits/men/${Math.floor(
+              Math.random() * 10
+            )}.jpg`,
+          }}
           containerStyle={styles.avatar}
         />
         <TextContainer>
@@ -63,7 +67,11 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({
       <StatusContainer>
         <StatusDot color={getStatusColor()} />
         <Text style={{ color: getStatusColor() }}>
-          {status === 'confirmed' ? 'Confirmada' : status === 'cancelled' ? 'Cancelada' : 'Pendente'}
+          {status === "confirmed"
+            ? "Confirmada"
+            : status === "cancelled"
+            ? "Cancelada"
+            : "Pendente"}
         </Text>
       </StatusContainer>
     </Card>
@@ -72,15 +80,18 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({
 
 const styles = {
   card: {
-    borderRadius: 10,
+    borderRadius: theme.radii.large,
     marginHorizontal: 0,
     marginVertical: 8,
-    padding: 15,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    padding: 16,
+    backgroundColor: theme.colors.surface,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 2,
   },
   avatar: {
     backgroundColor: theme.colors.primary,
@@ -120,7 +131,7 @@ const AppointmentInfo = styled.View`
 const InfoRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  marginBottom: 5px;
+  margin-bottom: 5px;
 `;
 
 const InfoLabel = styled.Text`
@@ -150,9 +161,9 @@ const StatusDot = styled.View<{ color: string }>`
 `;
 
 const StatusText = styled.Text<{ color: string }>`
-  fontSize: 14;
+  fontsize: 14;
   color: ${(props: { color: string }) => props.color};
-  fontWeight: 500;
+  fontweight: 500;
 `;
 
-export default AppointmentCard; 
+export default AppointmentCard;

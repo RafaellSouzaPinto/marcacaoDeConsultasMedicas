@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import styled from 'styled-components/native';
-import { ScrollView, ViewStyle, TextStyle } from 'react-native';
-import { Button, ListItem, Text } from 'react-native-elements';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useFocusEffect } from '@react-navigation/native';
-import { RootStackParamList } from '../types/navigation'; 
-import StatisticsCard from '../components/StatisticsCard';
-import { statisticsService, Statistics } from '../services/statistics';
-import theme from '../styles/theme';
-import Header from '../components/Header';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from "react";
+import styled from "styled-components/native";
+import { ScrollView, ViewStyle, TextStyle } from "react-native";
+import { Button, ListItem, Text } from "react-native-elements";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useFocusEffect } from "@react-navigation/native";
+import { RootStackParamList } from "../types/navigation";
+import StatisticsCard from "../components/StatisticsCard";
+import { statisticsService, Statistics } from "../services/statistics";
+import theme from "../styles/theme";
+import Header from "../components/Header";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type AdminDashboardScreenProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'AdminDashboard'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, "AdminDashboard">;
 };
 
 interface Appointment {
@@ -25,14 +25,14 @@ interface Appointment {
   date: string;
   time: string;
   specialty: string;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: "pending" | "confirmed" | "cancelled";
 }
 
 interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'doctor' | 'patient';
+  role: "admin" | "doctor" | "patient";
 }
 
 interface StyledProps {
@@ -41,9 +41,9 @@ interface StyledProps {
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case 'confirmed':
+    case "confirmed":
       return theme.colors.success;
-    case 'cancelled':
+    case "cancelled":
       return theme.colors.error;
     default:
       return theme.colors.warning;
@@ -52,35 +52,37 @@ const getStatusColor = (status: string) => {
 
 const getStatusText = (status: string) => {
   switch (status) {
-    case 'confirmed':
-      return 'Confirmada';
-    case 'cancelled':
-      return 'Cancelada';
+    case "confirmed":
+      return "Confirmada";
+    case "cancelled":
+      return "Cancelada";
     default:
-      return 'Pendente';
+      return "Pendente";
   }
 };
 
 const AdminDashboardScreen: React.FC = () => {
   const { user, signOut } = useAuth();
-  const navigation = useNavigation<AdminDashboardScreenProps['navigation']>();
+  const navigation = useNavigation<AdminDashboardScreenProps["navigation"]>();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
-    const [statistics, setStatistics] = useState<Statistics | null>(null);
+  const [statistics, setStatistics] = useState<Statistics | null>(null);
 
   const loadData = async () => {
     try {
       // Carrega consultas
-      const storedAppointments = await AsyncStorage.getItem('@MedicalApp:appointments');
+      const storedAppointments = await AsyncStorage.getItem(
+        "@MedicalApp:appointments"
+      );
       if (storedAppointments) {
         const allAppointments: Appointment[] = JSON.parse(storedAppointments);
         setAppointments(allAppointments);
       }
 
       // Carrega usuários
-      const storedUsers = await AsyncStorage.getItem('@MedicalApp:users');
+      const storedUsers = await AsyncStorage.getItem("@MedicalApp:users");
       if (storedUsers) {
         const allUsers: User[] = JSON.parse(storedUsers);
         setUsers(allUsers);
@@ -89,15 +91,11 @@ const AdminDashboardScreen: React.FC = () => {
       // Carrega estatísticas
       const stats = await statisticsService.getGeneralStatistics();
       setStatistics(stats);
-
-
     } catch (error) {
-      console.error('Erro ao carregar dados:', error);
+      console.error("Erro ao carregar dados:", error);
     } finally {
       setLoading(false);
     }
-
-
   };
 
   // Carrega os dados quando a tela estiver em foco
@@ -107,22 +105,30 @@ const AdminDashboardScreen: React.FC = () => {
     }, [])
   );
 
-  const handleUpdateStatus = async (appointmentId: string, newStatus: 'confirmed' | 'cancelled') => {
+  const handleUpdateStatus = async (
+    appointmentId: string,
+    newStatus: "confirmed" | "cancelled"
+  ) => {
     try {
-      const storedAppointments = await AsyncStorage.getItem('@MedicalApp:appointments');
+      const storedAppointments = await AsyncStorage.getItem(
+        "@MedicalApp:appointments"
+      );
       if (storedAppointments) {
         const allAppointments: Appointment[] = JSON.parse(storedAppointments);
-        const updatedAppointments = allAppointments.map(appointment => {
+        const updatedAppointments = allAppointments.map((appointment) => {
           if (appointment.id === appointmentId) {
             return { ...appointment, status: newStatus };
           }
           return appointment;
         });
-        await AsyncStorage.setItem('@MedicalApp:appointments', JSON.stringify(updatedAppointments));
+        await AsyncStorage.setItem(
+          "@MedicalApp:appointments",
+          JSON.stringify(updatedAppointments)
+        );
         loadData(); // Recarrega os dados
       }
     } catch (error) {
-      console.error('Erro ao atualizar status:', error);
+      console.error("Erro ao atualizar status:", error);
     }
   };
 
@@ -134,14 +140,14 @@ const AdminDashboardScreen: React.FC = () => {
 
         <Button
           title="Gerenciar Usuários"
-          onPress={() => navigation.navigate('UserManagement')}
+          onPress={() => navigation.navigate("UserManagement")}
           containerStyle={styles.button as ViewStyle}
           buttonStyle={styles.buttonStyle}
         />
 
         <Button
           title="Meu Perfil"
-          onPress={() => navigation.navigate('Profile')}
+          onPress={() => navigation.navigate("Profile")}
           containerStyle={styles.button as ViewStyle}
           buttonStyle={styles.buttonStyle}
         />
@@ -159,7 +165,9 @@ const AdminDashboardScreen: React.FC = () => {
               title="Consultas Confirmadas"
               value={statistics.confirmedAppointments}
               color={theme.colors.success}
-              subtitle={`${statistics.statusPercentages.confirmed.toFixed(1)}% do total`}
+              subtitle={`${statistics.statusPercentages.confirmed.toFixed(
+                1
+              )}% do total`}
             />
             <StatisticsCard
               title="Pacientes Ativos"
@@ -180,15 +188,14 @@ const AdminDashboardScreen: React.FC = () => {
         {statistics && Object.entries(statistics.specialties).length > 0 && (
           <SpecialtyContainer>
             {Object.entries(statistics.specialties)
-              .sort(([,a], [,b]) => b - a)
+              .sort(([, a], [, b]) => b - a)
               .slice(0, 3)
               .map(([specialty, count]) => (
                 <SpecialtyItem key={specialty}>
                   <SpecialtyName>{specialty}</SpecialtyName>
                   <SpecialtyCount>{count} consultas</SpecialtyCount>
                 </SpecialtyItem>
-              ))
-            }
+              ))}
           </SpecialtyContainer>
         )}
 
@@ -215,17 +222,21 @@ const AdminDashboardScreen: React.FC = () => {
                     {getStatusText(appointment.status)}
                   </StatusText>
                 </StatusBadge>
-                {appointment.status === 'pending' && (
+                {appointment.status === "pending" && (
                   <ButtonContainer>
                     <Button
                       title="Confirmar"
-                      onPress={() => handleUpdateStatus(appointment.id, 'confirmed')}
+                      onPress={() =>
+                        handleUpdateStatus(appointment.id, "confirmed")
+                      }
                       containerStyle={styles.actionButton as ViewStyle}
                       buttonStyle={styles.confirmButton}
                     />
                     <Button
                       title="Cancelar"
-                      onPress={() => handleUpdateStatus(appointment.id, 'cancelled')}
+                      onPress={() =>
+                        handleUpdateStatus(appointment.id, "cancelled")
+                      }
                       containerStyle={styles.actionButton as ViewStyle}
                       buttonStyle={styles.cancelButton}
                     />
@@ -253,7 +264,7 @@ const styles = {
   },
   button: {
     marginBottom: 20,
-    width: '100%',
+    width: "100%",
   },
   buttonStyle: {
     backgroundColor: theme.colors.primary,
@@ -265,7 +276,7 @@ const styles = {
   },
   actionButton: {
     marginTop: 8,
-    width: '48%',
+    width: "48%",
   },
   confirmButton: {
     backgroundColor: theme.colors.success,
@@ -277,7 +288,7 @@ const styles = {
   },
   doctorName: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: "700",
     color: theme.colors.text,
   },
   specialty: {
@@ -314,30 +325,36 @@ const SectionTitle = styled.Text`
 `;
 
 const AppointmentCard = styled(ListItem)`
-  background-color: ${theme.colors.background};
-  border-radius: 8px;
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   margin-bottom: 10px;
   padding: 15px;
   border-width: 1px;
   border-color: ${theme.colors.border};
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.08;
+  shadow-radius: 8px;
+  elevation: 2;
 `;
 
 const LoadingText = styled.Text`
   text-align: center;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-size: 16px;
   margin-top: 20px;
 `;
 
 const EmptyText = styled.Text`
   text-align: center;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-size: 16px;
   margin-top: 20px;
 `;
 
 const StatusBadge = styled.View<StyledProps>`
-  background-color: ${(props: StyledProps) => getStatusColor(props.status) + '20'};
+  background-color: ${(props: StyledProps) =>
+    getStatusColor(props.status) + "20"};
   padding: 4px 8px;
   border-radius: 4px;
   align-self: flex-start;
@@ -364,12 +381,17 @@ const StatisticsGrid = styled.View`
 `;
 
 const SpecialtyContainer = styled.View`
-  background-color: ${theme.colors.white};
-  border-radius: 8px;
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   padding: 16px;
   margin-bottom: 20px;
   border-width: 1px;
   border-color: ${theme.colors.border};
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.08;
+  shadow-radius: 8px;
+  elevation: 2;
 `;
 
 const SpecialtyItem = styled.View`

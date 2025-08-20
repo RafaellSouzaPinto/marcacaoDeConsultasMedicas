@@ -140,9 +140,11 @@ const styles = {
   cancelButtonStyle: {
     backgroundColor: theme.colors.secondary,
     paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
   confirmButtonStyle: {
     paddingVertical: 12,
+    borderRadius: theme.radii.medium,
   },
 };
 
@@ -155,15 +157,17 @@ const Overlay = styled.View`
 `;
 
 const ModalContainer = styled.View`
-  background-color: ${theme.colors.white};
-  border-radius: 12px;
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radii.large}px;
   width: 100%;
-  max-width: 400px;
-  shadow-color: ${theme.colors.text};
-  shadow-offset: 0px 4px;
-  shadow-opacity: 0.25;
-  shadow-radius: 4px;
-  elevation: 5;
+  max-width: 420px;
+  border-width: 1px;
+  border-color: ${theme.colors.border};
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.12;
+  shadow-radius: 10px;
+  elevation: 6;
 `;
 
 const Header = styled.View`
@@ -173,8 +177,8 @@ const Header = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
+  font-size: ${theme.typography.subtitle.fontSize}px;
+  font-weight: ${theme.typography.subtitle.fontWeight};
   color: ${theme.colors.text};
   text-align: center;
 `;
@@ -185,7 +189,7 @@ const Content = styled.View`
 
 const AppointmentInfo = styled.View`
   background-color: ${theme.colors.background};
-  border-radius: 8px;
+  border-radius: ${theme.radii.medium}px;
   padding: 16px;
   margin-bottom: 16px;
 `;
@@ -198,14 +202,14 @@ const InfoRow = styled.View`
 
 const InfoLabel = styled.Text`
   font-size: 14px;
-  color: ${theme.colors.text};
+  color: ${theme.colors.textSecondary};
   font-weight: 500;
 `;
 
 const InfoValue = styled.Text`
   font-size: 14px;
   color: ${theme.colors.text};
-  font-weight: 400;
+  font-weight: 600;
   flex: 1;
   text-align: right;
 `;
@@ -220,7 +224,7 @@ const ConfirmationText = styled.Text<{ isCancel: boolean }>`
     props.isCancel ? theme.colors.error : theme.colors.success};
   text-align: center;
   margin-bottom: 20px;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const ButtonContainer = styled.View`
