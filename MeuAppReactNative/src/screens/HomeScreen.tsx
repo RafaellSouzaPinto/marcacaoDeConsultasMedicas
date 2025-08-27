@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components/native";
-import { FlatList, RefreshControl, TouchableOpacity } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
 import { HeaderContainer, HeaderTitle } from "../components/Header";
@@ -11,6 +10,22 @@ import { Appointment } from "../types/appointments";
 import { Doctor } from "../types/doctors";
 import { RootStackParamList } from "../types/navigation";
 import { useFocusEffect } from "@react-navigation/native";
+import {
+  Container,
+  Content,
+  AppointmentList,
+  AppointmentCard,
+  DoctorImage,
+  InfoContainer,
+  DoctorName,
+  DoctorSpecialty,
+  DateTime,
+  Description,
+  Status,
+  ActionButtons,
+  ActionButton,
+  EmptyText,
+} from "./HomeScreen/styles";
 
 type HomeScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Home">;
@@ -150,97 +165,5 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     </Container>
   );
 };
-
-const Container = styled.View`
-  flex: 1;
-  background-color: ${theme.colors.background};
-`;
-
-const Content = styled.View`
-  flex: 1;
-  padding: ${theme.spacing.medium}px;
-`;
-
-const AppointmentList = styled(FlatList)`
-  flex: 1;
-`;
-
-const AppointmentCard = styled.View`
-  background-color: ${theme.colors.surface};
-  border-radius: ${theme.radii.large}px;
-  padding: ${theme.spacing.medium}px;
-  margin-bottom: ${theme.spacing.medium}px;
-  flex-direction: row;
-  align-items: center;
-  border-width: 1px;
-  border-color: ${theme.colors.border};
-  shadow-color: #000;
-  shadow-opacity: 0.08;
-  shadow-radius: 8px;
-  shadow-offset: 0px 1px;
-  elevation: 2;
-`;
-
-const DoctorImage = styled.Image`
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  margin-right: ${theme.spacing.medium}px;
-`;
-
-const InfoContainer = styled.View`
-  flex: 1;
-`;
-
-const DoctorName = styled.Text`
-  font-size: ${theme.typography.subtitle.fontSize}px;
-  font-weight: ${theme.typography.subtitle.fontWeight};
-  color: ${theme.colors.text};
-`;
-
-const DoctorSpecialty = styled.Text`
-  font-size: ${theme.typography.body.fontSize}px;
-  color: ${theme.colors.text};
-  opacity: 0.8;
-  margin-bottom: 4px;
-`;
-
-const DateTime = styled.Text`
-  font-size: ${theme.typography.body.fontSize}px;
-  color: ${theme.colors.textSecondary};
-  margin-top: 4px;
-`;
-
-const Description = styled.Text`
-  font-size: ${theme.typography.body.fontSize}px;
-  color: ${theme.colors.text};
-  opacity: 0.8;
-  margin-top: 4px;
-`;
-
-const Status = styled.Text<{ status: string }>`
-  font-size: ${theme.typography.body.fontSize}px;
-  color: ${(props: { status: string }) =>
-    props.status === "pending" ? theme.colors.error : theme.colors.success};
-  margin-top: 4px;
-  font-weight: bold;
-`;
-
-const ActionButtons = styled.View`
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: ${theme.spacing.small}px;
-`;
-
-const ActionButton = styled(TouchableOpacity)`
-  padding: ${theme.spacing.small}px;
-  margin-left: ${theme.spacing.small}px;
-`;
-
-const EmptyText = styled.Text`
-  text-align: center;
-  color: ${theme.colors.textSecondary};
-  margin-top: ${theme.spacing.large}px;
-`;
 
 export default HomeScreen;
