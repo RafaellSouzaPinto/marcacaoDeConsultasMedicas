@@ -5,11 +5,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import { HeaderContainer, HeaderTitle } from "../components/Header";
 import theme from "../styles/theme";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Appointment } from "../types/appointments";
 import { Doctor } from "../types/doctors";
 import { RootStackParamList } from "../types/navigation";
 import { useFocusEffect } from "@react-navigation/native";
+import { HomeAppointmentService } from "./HomeScreen/services/appointmentService";
 import {
   Container,
   Content,
@@ -58,10 +58,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   const loadAppointments = async () => {
     try {
-      const storedAppointments = await AsyncStorage.getItem("appointments");
-      if (storedAppointments) {
-        setAppointments(JSON.parse(storedAppointments));
-      }
+      const appointments = await HomeAppointmentService.loadAppointments();
+      setAppointments(appointments);
     } catch (error) {
       console.error("Erro ao carregar consultas:", error);
     }
@@ -81,6 +79,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   const getDoctorInfo = (doctorId: string): Doctor | undefined => {
     return doctors.find((doctor) => doctor.id === doctorId);
+  };
+
+  const handleDeleteAppointment = async (appointmentId: string) => {
+    try {
+      const updatedAppointments = await HomeAppointmentService.deleteAppointment(appointmentId);
+      setAppointments(updatedAppointments);
+    } catch (error) {
+      console.error("Erro ao deletar consulta:", error);
+    }
   };
 
   const renderAppointment = ({ item }: { item: Appointment }) => {
@@ -112,7 +119,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 color={theme.colors.primary}
               />
             </ActionButton>
-            <ActionButton>
+            <ActionButton onPress={() => handleDeleteAppointment(item.id)}>
               <Icon
                 name="delete"
                 type="material"
