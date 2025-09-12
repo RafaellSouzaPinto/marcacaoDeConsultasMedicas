@@ -1,4 +1,3 @@
-// src/screens/DoctorDashboardScreen/components/AppointmentItem.tsx
 import React from "react";
 import { Icon } from "react-native-elements";
 import { Appointment } from "../../../types/appointments";
