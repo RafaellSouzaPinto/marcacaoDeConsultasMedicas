@@ -1,4 +1,3 @@
-// src/screens/DoctorDashboardScreen/styles.ts
 import styled from "styled-components/native";
 import { FlatList } from "react-native";
 import theme from "../../styles/theme";
