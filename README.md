@@ -24,9 +24,7 @@
 <td>
 
 **Rafael de Souza Pinto**  
-🎓 **RM:** 555130  
-📧 **Email:** rafael.dev@email.com  
-💼 **LinkedIn:** [linkedin.com/in/rafaeldevbr](https://linkedin.com/in/rafaeldevbr)
+🎓 **RM:** 555130
 
 </td>
 </tr>
