@@ -568,7 +568,7 @@ Para contribuir:
 
 <div align="center">
 
-Este projeto foi desenvolvido como parte do curso de **React Native** da **FIAP**.
+Este projeto foi desenvolvido como parte do curso de **Mobile Application Development** da **FIAP**.
 
 **© 2025 Rafael de Souza Pinto - RM: 555130**
 
