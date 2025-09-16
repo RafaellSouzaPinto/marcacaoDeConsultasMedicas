@@ -407,19 +407,6 @@ const ProfileScreen: React.FC = () => {
 </tr>
 </table>
 
-### **📋 Cenários de Teste**
-
-<details>
-<summary>👤 <strong>Fluxo do Paciente</strong></summary>
-
-1. ✅ Fazer login com credenciais de paciente
-2. ✅ Testar upload de foto de perfil
-3. ✅ Agendar uma nova consulta
-4. ✅ Visualizar consultas no dashboard
-5. ✅ Editar dados do perfil
-6. ✅ Verificar notificações
-
-</details>
 
 <details>
 <summary>🩺 <strong>Fluxo do Médico</strong></summary>
@@ -462,18 +449,6 @@ npm run type-check    # Verificação TypeScript
 
 # Build
 npm run build         # Build para produção
-```
-
-### **📊 Estrutura de Commits**
-
-```bash
-feat: ✨ Nova funcionalidade
-fix: 🐛 Correção de bug
-docs: 📚 Documentação
-style: 💄 Formatação
-refactor: ♻️ Refatoração
-perf: ⚡ Performance
-test: 🧪 Testes
 ```
 
 ---
@@ -529,38 +504,6 @@ src/
 <td>Escalabilidade garantida</td>
 </tr>
 </table>
-
----
-
-## 🚀 Próximos Passos
-
-### **🎯 Roadmap de Melhorias**
-
-- [ ] 🌐 **API Integration** - Conectar com backend real
-- [ ] 🧪 **Unit Tests** - Testes para hooks e services
-- [ ] 📊 **Analytics** - Métricas de uso detalhadas
-- [ ] 🎨 **Dark Mode** - Tema escuro completo
-- [ ] 🔔 **Push Notifications** - Notificações reais
-- [ ] 📱 **Offline Mode** - Funcionalidade offline
-- [ ] 🌍 **Internationalization** - Suporte a múltiplos idiomas
-
----
-
-## 🤝 Contribuição
-
-<div align="center">
-
-**Contribuições são bem-vindas!**
-
-Para contribuir:
-
-1. 🍴 Fork o projeto
-2. 🌟 Crie uma branch (`git checkout -b feature/nova-feature`)
-3. 💾 Commit suas mudanças (`git commit -m 'feat: adiciona nova feature'`)
-4. 📤 Push para a branch (`git push origin feature/nova-feature`)
-5. 🔄 Abra um Pull Request
-
-</div>
 
 ---
 
